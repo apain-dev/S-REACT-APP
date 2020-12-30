@@ -1,6 +1,6 @@
 {
   "name": "@outworld/js-spotify",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "@capacitor/android": "^2.4.5",
@@ -28,7 +28,7 @@
     "start": "react-scripts start",
     "build": "ionic build  && mv docker/supervisord-staging.conf docker/supervisord.conf && npm run postbuild",
     "build:prod": "ionic build && npm run postbuild",
-    "postbuild": "mkdir -p .enoviah/service/@outworld/js-spotify && mv build .enoviah/service/@outworld/js-spotify",
+    "postbuild": "mkdir -p .enoviah/service/@outworld/js-spotify && mv build/* .enoviah/service/@outworld/js-spotify/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
