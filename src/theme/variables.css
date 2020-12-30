@@ -1,6 +1,12 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+* {
+  font-family: 'Montserrat', serif !important;
+}
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
@@ -12,20 +18,20 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-primary-tint: #fff;
 
   /** secondary **/
-  --ion-color-secondary: #3dc2ff;
+  --ion-color-secondary: #fafafa;
   --ion-color-secondary-rgb: 61, 194, 255;
-  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast: black;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #36abe0;
-  --ion-color-secondary-tint: #50c8ff;
+  --ion-color-secondary-shade: #fafafa;
+  --ion-color-secondary-tint: #fafafa;
 
   /** tertiary **/
-  --ion-color-tertiary: #5260ff;
+  --ion-color-tertiary: black;
   --ion-color-tertiary-rgb: 82, 96, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #4854e0;
-  --ion-color-tertiary-tint: #6370ff;
+  --ion-color-tertiary-shade: black;
+  --ion-color-tertiary-tint: black;
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -52,12 +58,12 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-danger-tint: #ed576b;
 
   /** dark **/
-  --ion-color-dark: #222428;
+  --ion-color-dark: #161224;
   --ion-color-dark-rgb: 34, 36, 40;
-  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast: #EEEEEF;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1e2023;
-  --ion-color-dark-tint: #383a3e;
+  --ion-color-dark-shade: #161224;
+  --ion-color-dark-tint: #161224;
 
   /** medium **/
   --ion-color-medium: #92949c;
@@ -75,11 +81,13 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  --ion-background-color: #FDFDFD;
-
+  --ion-background-color: #fafafa;
+  --ion-toolbar-background: var(--ion-background-color);
 
   --ion-tab-bar-color: var(--ion-color-light);
   --ion-tab-bar-color-selected: var(--ion-color-danger);
+
+  --ion-padding: 1.75rem;
 }
 
 @media (prefers-color-scheme: dark) {

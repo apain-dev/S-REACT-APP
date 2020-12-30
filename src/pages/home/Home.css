@@ -1,3 +1,19 @@
 .card:not(:last-child) {
   margin-right: 1rem;
 }
+
+ion-toolbar {
+  --padding-start: 0;
+}
+
+ion-button {
+  margin-inline: 0;
+}
+
+ion-searchbar {
+  height: 5rem !important;
+}
+
+.searchbar-input-container {
+  height: 90% !important;
+}

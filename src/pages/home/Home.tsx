@@ -3,19 +3,21 @@ import {
   IonAvatar, IonContent, IonHeader, IonPage, IonSearchbar, IonText, IonToolbar,
 } from '@ionic/react';
 import './Home.css';
-import { heartOutline, laptopOutline, rocketOutline } from 'ionicons/icons';
+import {
+  heartOutline, laptopOutline, rocketOutline, watchOutline,
+} from 'ionicons/icons';
 import IconCard from '../../components/cards/IconCard/IconCard';
 
 const Home: React.FC = () => (
   <IonPage>
-    <IonContent fullscreen>
-      <IonHeader collapse="condense" className="ion-no-border ion-padding">
-        <IonToolbar>
+    <IonContent class="ion-padding" fullscreen>
+      <IonHeader className="ion-no-border">
+        <IonToolbar color="secondary">
           <div slot="secondary">
-            <p>
-              <h4 className="ion-no-margin"><IonText color="light">Good morning,</IonText></h4>
-              <h1 className="ion-no-margin font-bold"><IonText color="danger">Sophia !</IonText></h1>
-            </p>
+            <div>
+              <h5><IonText color="light">Good morning,</IonText></h5>
+              <h1 className="ion-no-margin font-bold"><IonText color="danger">Sophia</IonText></h1>
+            </div>
           </div>
 
           <IonAvatar slot="primary">
@@ -23,16 +25,15 @@ const Home: React.FC = () => (
           </IonAvatar>
         </IonToolbar>
       </IonHeader>
-      <IonContent class="ion-padding">
-        <IonToolbar>
-          <IonSearchbar className="ion-no-padding" placeholder="Search Favorites" />
-        </IonToolbar>
-        <section className="inline-scroll">
-          <IconCard icon={heartOutline} />
-          <IconCard icon={rocketOutline} />
-          <IconCard icon={laptopOutline} />
-        </section>
-      </IonContent>
+      <IonToolbar className="py-3">
+        <IonSearchbar className="ion-no-padding" placeholder="Search Favorites" />
+      </IonToolbar>
+      <section className="ion-justify-content-between d-flex">
+        <IconCard subtitle="Favoris" icon={heartOutline} />
+        <IconCard subtitle="Populaire" icon={rocketOutline} />
+        <IconCard subtitle="Aujourd'hui" icon={laptopOutline} />
+        <IconCard subtitle="Récent" icon={watchOutline} />
+      </section>
     </IonContent>
   </IonPage>
 );
