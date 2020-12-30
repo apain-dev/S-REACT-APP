@@ -1,24 +1,29 @@
 import React from 'react';
 import {
-  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
+  IonAvatar,
+  IonContent, IonHeader, IonPage, IonText, IonToolbar,
 } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
+import Card from '../components/cards/Card';
 
 const Tab2: React.FC = () => (
   <IonPage>
-    <IonHeader>
-      <IonToolbar>
-        <IonTitle>Tab 2</IonTitle>
-      </IonToolbar>
-    </IonHeader>
     <IonContent fullscreen>
-      <IonHeader collapse="condense">
+      <IonHeader collapse="condense" className="ion-no-border ion-padding">
         <IonToolbar>
-          <IonTitle size="large">Tab 2</IonTitle>
+          <div slot="secondary">
+            <p>
+              <h4 className="ion-no-margin"><IonText color="light">Good morning,</IonText></h4>
+              <h1 className="ion-no-margin font-bold"><IonText color="danger">Sophia</IonText></h1>
+            </p>
+          </div>
+
+          <IonAvatar slot="primary">
+            <img alt="Your avatar" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+          </IonAvatar>
         </IonToolbar>
       </IonHeader>
-      <ExploreContainer name="Tab 2 page" />
+      <Card />
     </IonContent>
   </IonPage>
 );

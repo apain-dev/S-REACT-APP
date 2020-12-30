@@ -113,21 +113,21 @@ const Card: React.FC<ContainerProps> = () => (
             </IonLabel>
           </IonItem>
           <IonItem>
-            <IonIcon name="call" slot="start" />
+            <IonIcon slot="start" />
             <IonLabel>
               <h2>(555) 418-5602</h2>
               <p>Mobile phone</p>
             </IonLabel>
           </IonItem>
           <IonItem>
-            <IonIcon name="mail" slot="start" />
+            <IonIcon slot="start" />
             <IonLabel>
               <h2>jparks@workmail.com</h2>
               <p>Work email</p>
             </IonLabel>
           </IonItem>
           <IonItem>
-            <IonIcon name="mail" slot="start" />
+            <IonIcon slot="start" />
             <IonLabel>
               <h2>john.parks92@email.com</h2>
               <p>Personal email</p>

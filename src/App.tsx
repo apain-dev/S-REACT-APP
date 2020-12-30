@@ -4,8 +4,10 @@ import {
   IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
+import {
+  ellipseOutline, squareOutline, triangle,
+} from 'ionicons/icons';
+import Home from './pages/home/Home';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
@@ -27,28 +29,29 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/globals.css';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact />
+          <Route path="/home" component={Home} exact />
           <Route path="/tab2" component={Tab2} exact />
           <Route path="/tab3" component={Tab3} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact />
+          <Route path="/" render={() => <Redirect to="/home" />} exact />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
+          <IonTabButton tab="home" href="/home">
             <IonIcon icon={triangle} />
             <IonLabel>Tab 1</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={ellipseOutline} />
             <IonLabel>Tab 2</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
+            <IonIcon icon={squareOutline} />
             <IonLabel>Tab 3</IonLabel>
           </IonTabButton>
         </IonTabBar>

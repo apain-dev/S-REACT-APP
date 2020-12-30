@@ -34,6 +34,8 @@ BackEnd
 
 # TODO
 
+- Integrate https://cdn.dribbble.com/users/1925666/screenshots/11580696/media/c9ec7c8cb921b188e3c50a628c16ff6a.png
+
 - [ ] CardRechercheInfos
     - Recherche d'infos sur un album
     - Recherche d'infos sur un artiste

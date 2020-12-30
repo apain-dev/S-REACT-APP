@@ -1,0 +1,35 @@
+.emoji {
+  color: red;
+}
+
+.card {
+  flex: 1 0 auto;
+  height: auto;
+}
+
+ion-tab-bar {
+  border: 0;
+  padding: 1rem 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
+}
+
+.inline-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  overflow-x: scroll;
+}
