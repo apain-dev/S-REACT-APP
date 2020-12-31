@@ -41,10 +41,10 @@ BackEnd
     - Recherche d'infos sur un artiste
 - [ ] CardMesFollowers
     - Listing et gestion des follow
-- [ ] CardMonProfil
-    - route /me
 - [ ] CardMesEcoutes
     - Listing des habitudes d'écoutes
+- [ ] CardMonProfil
+  - route /me
 - [ ] Page Télécommande du Player
     - Pause
     - Affichage de la lecture courrante

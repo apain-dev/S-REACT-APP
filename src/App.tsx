@@ -1,38 +1,96 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
-  IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs,
+  IonApp,
+  IonFab,
+  IonFabButton,
+  IonFabList,
+  IonIcon,
+  IonLabel,
+  IonLoading, IonModal,
+  IonRouterOutlet,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import {
-  ellipseOutline, squareOutline, triangle,
+  ellipseOutline,
+  homeOutline, logoAngular, logoChrome,
+  logoFacebook, logoGithub, logoIonic, logoJavascript, logoNpm,
+  logoPwa, logoReact,
+  logoTwitter, logoVimeo,
+  logoYoutube,
+  squareOutline,
 } from 'ionicons/icons';
 import Home from './pages/home/Home';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
-
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-
-/* Theme variables */
-import './theme/variables.css';
-import './theme/globals.css';
+import './theme/main.scss';
 
 const App: React.FC = () => (
-  <IonApp>
+  <IonApp className="outworld">
+    <IonLoading
+      spinner="bubbles"
+      cssClass="my-custom-class"
+      isOpen
+      message="Please wait..."
+      duration={5000}
+    />
+    <IonFab vertical="center" horizontal="end" className="slide-in-left" slot="fixed">
+      <IonFabButton>Share</IonFabButton>
+      <IonFabList side="top">
+        <IonFabButton>
+          <IonIcon icon={logoFacebook} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoTwitter} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoYoutube} />
+        </IonFabButton>
+      </IonFabList>
+
+      <IonFabList side="end">
+        <IonFabButton>
+          <IonIcon icon={logoPwa} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoNpm} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoIonic} />
+        </IonFabButton>
+      </IonFabList>
+
+      <IonFabList side="bottom">
+        <IonFabButton>
+          <IonIcon icon={logoGithub} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoJavascript} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoAngular} />
+        </IonFabButton>
+      </IonFabList>
+
+      <IonFabList side="start">
+        <IonFabButton>
+          <IonIcon icon={logoVimeo} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoChrome} />
+        </IonFabButton>
+        <IonFabButton>
+          <IonIcon icon={logoReact} />
+        </IonFabButton>
+      </IonFabList>
+    </IonFab>
+    <IonModal isOpen cssClass="my-custom-class">
+      <p>This is modal content</p>
+    </IonModal>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -41,9 +99,9 @@ const App: React.FC = () => (
           <Route path="/tab3" component={Tab3} />
           <Route path="/" render={() => <Redirect to="/home" />} exact />
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+        <IonTabBar color="light-red" slot="bottom">
           <IonTabButton tab="home" href="/home">
-            <IonIcon icon={triangle} />
+            <IonIcon icon={homeOutline} />
             <IonLabel>Tab 1</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
