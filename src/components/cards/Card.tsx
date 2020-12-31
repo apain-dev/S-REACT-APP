@@ -26,7 +26,7 @@ interface ContainerProps {
 
 const Card: React.FC<ContainerProps> = () => (
   <div className="debug">
-    <IonCard className="action-card">
+    <IonCard className="action-card ion-no-margin ion-margin-top">
       <img alt="An elephant." className="header-img" src="/assets/card-top-img.png" />
       <IonCardHeader>
         <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
@@ -52,7 +52,7 @@ const Card: React.FC<ContainerProps> = () => (
       </IonCardContent>
     </IonCard>
 
-    <IonCard className="apps-card">
+    <IonCard className="apps-card ion-no-margin ion-margin-top">
       <IonCardHeader>
         <IonCardSubtitle>Your Daily List</IonCardSubtitle>
         <IonCardTitle>Ionic Apps We Think You&apos;ll Love.</IonCardTitle>
@@ -99,7 +99,7 @@ const Card: React.FC<ContainerProps> = () => (
       </IonCardContent>
     </IonCard>
 
-    <IonCard className="coworker-card">
+    <IonCard className="coworker-card ion-no-margin ion-margin-top">
       <img alt="An elephant." src="/assets/card-coworker-header.png" className="header-img" />
       <IonCardContent>
         <IonList lines="none">
@@ -137,7 +137,7 @@ const Card: React.FC<ContainerProps> = () => (
       </IonCardContent>
     </IonCard>
 
-    <IonCard className="music-card">
+    <IonCard className="music-card ion-no-margin ion-margin-top">
       <IonCardHeader>
         <img alt="An elephant." src="/assets/card-album.png" />
       </IonCardHeader>

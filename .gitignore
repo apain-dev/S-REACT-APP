@@ -3,6 +3,7 @@
 .idea
 .eslintcache
 /android
+/perso
 
 # dependencies
 /node_modules

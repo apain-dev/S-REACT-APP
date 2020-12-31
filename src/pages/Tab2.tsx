@@ -1,21 +1,20 @@
 import React from 'react';
 import {
-  IonAvatar,
-  IonContent, IonHeader, IonPage, IonText, IonToolbar,
+  IonAvatar, IonContent, IonHeader, IonPage, IonText, IonToolbar,
 } from '@ionic/react';
 import './Tab2.css';
 import Card from '../components/cards/Card';
 
 const Tab2: React.FC = () => (
   <IonPage>
-    <IonContent fullscreen>
-      <IonHeader collapse="condense" className="ion-no-border ion-padding">
-        <IonToolbar>
-          <div slot="secondary">
-            <p>
-              <h4 className="ion-no-margin"><IonText color="light">Good morning,</IonText></h4>
+    <IonContent className="ion-padding" fullscreen>
+      <IonHeader className="ion-no-border">
+        <IonToolbar color="secondary">
+          <div slot="start">
+            <div>
+              <h5><IonText color="light">Good morning,</IonText></h5>
               <h1 className="ion-no-margin font-bold"><IonText color="danger">Sophia</IonText></h1>
-            </p>
+            </div>
           </div>
 
           <IonAvatar slot="primary">
@@ -23,7 +22,9 @@ const Tab2: React.FC = () => (
           </IonAvatar>
         </IonToolbar>
       </IonHeader>
-      <Card />
+      <section>
+        <Card />
+      </section>
     </IonContent>
   </IonPage>
 );
