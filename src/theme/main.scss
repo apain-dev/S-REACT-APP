@@ -11,8 +11,6 @@
 @import "mixins/visibility";
 @import "mixins/media-query";
 
-// @import "abstracts";
-
 @import "animations/slide-in";
 @import "animations/slide-out";
 @import "animations/fade-in";
@@ -20,7 +18,7 @@
 @import "bases/override";
 @import "bases/font";
 
-// @import "components";
+ @import "components/ion-button";
 
 @import "layouts/ion-content";
 @import "layouts/ion-header";
