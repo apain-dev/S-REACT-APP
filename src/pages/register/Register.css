@@ -1,0 +1,28 @@
+.card:not(:last-child) {
+  margin-right: 1rem;
+}
+
+ion-toolbar {
+  --padding-start: 0;
+}
+
+ion-list-header ion-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-danger);
+  --color: var(--ion-color-danger-contrast);
+}
+ion-button {
+  margin-inline: 0;
+}
+
+ion-searchbar {
+  height: 5rem !important;
+}
+
+.searchbar-input-container {
+  height: 90% !important;
+}

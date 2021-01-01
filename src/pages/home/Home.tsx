@@ -38,6 +38,7 @@ import {
 } from 'ionicons/icons';
 import IconCard from '../../components/cards/IconCard/IconCard';
 import UserToolbar from '../../components/userToolbar/UserToolbar';
+import ModalContext from '../../contexts/ModalContext';
 
 const Home: React.FC = () => (
   <IonPage className="fade-in">
@@ -47,10 +48,22 @@ const Home: React.FC = () => (
         <IonSearchbar mode="ios" className="ion-no-padding" placeholder="Search Favorites" />
       </IonToolbar>
       <section className="ion-justify-content-between d-flex">
-        <IconCard subtitle="Favoris" icon={heartOutline} />
-        <IconCard subtitle="Populaire" icon={rocketOutline} />
-        <IconCard subtitle="Aujourd'hui" icon={laptopOutline} />
-        <IconCard subtitle="Récent" icon={watchOutline} />
+        <ModalContext.Consumer>
+          {
+              (modalContext) => (
+                <>
+                  <IconCard
+                    subtitle="Favoris"
+                    onClick={() => modalContext.setVisibility(!modalContext.isOpen)}
+                    icon={heartOutline}
+                  />
+                  <IconCard subtitle="Populaire" icon={rocketOutline} />
+                  <IconCard subtitle="Aujourd'hui" icon={laptopOutline} />
+                  <IconCard subtitle="Récent" icon={watchOutline} />
+                </>
+              )
+            }
+        </ModalContext.Consumer>
       </section>
       <section>
         <IonListHeader className="ion-no-padding">
