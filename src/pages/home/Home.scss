@@ -1,0 +1,64 @@
+.card:not(:last-child) {
+  margin-right: 1rem;
+}
+.slides {
+}
+
+
+ion-slides {
+  border-radius: 0 0 28px 28px;
+  .swiper-wrapper {
+    // padding-bottom: 2rem;
+  }
+  ion-slide {
+    ion-card {
+      --background-hover: red;
+      margin-left: 0;
+      width: 100%;
+      box-shadow: none;
+      border-radius: 14px;
+      padding: 14px;
+      background: rgba(255,255,255,.8);
+      ion-card-title {
+        font-size: 1rem;
+      }
+      .main {
+        width: 50%;
+        height: 50%;
+        border-radius: 50px;
+        background: #FFFFFF;
+        box-shadow:  7px 7px 20px #dbdfe2,
+        -7px -7px 20px #ffffff;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 30px;
+        }
+
+
+
+      }
+
+    }
+  }
+}
+
+ion-toolbar {
+  --padding-start: 0;
+}
+
+ion-list-header ion-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+ion-searchbar {
+  height: 5rem !important;
+}
+
+.searchbar-input-container {
+  height: 90% !important;
+}

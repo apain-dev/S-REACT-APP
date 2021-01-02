@@ -1,55 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
+  IonBadge,
   IonButton,
   IonCard,
   IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
   IonContent,
   IonIcon,
-  IonItem,
-  IonItemOption,
-  IonItemOptions,
-  IonItemSliding,
   IonLabel,
-  IonList,
   IonListHeader,
-  IonNote,
   IonPage,
+  IonProgressBar,
   IonSearchbar,
+  IonSlide,
+  IonSlides,
   IonToolbar,
 } from '@ionic/react';
-import './Home.css';
+import './Home.scss';
 import {
-  archive,
-  arrowForwardOutline,
-  ellipsisHorizontal,
-  ellipsisVertical,
-  heart,
-  heartOutline,
-  laptopOutline,
-  pin,
-  rocketOutline,
-  star,
-  trash,
-  walk,
-  warning,
-  watchOutline,
-  wifi,
-  wine,
+  arrowForwardOutline, flameOutline, heartOutline, rocketOutline, watchOutline,
 } from 'ionicons/icons';
 import IconCard from '../../components/cards/IconCard/IconCard';
 import UserToolbar from '../../components/userToolbar/UserToolbar';
 import ModalContext from '../../contexts/ModalContext';
+import useDataProvider from '../../hooks/useDataProvider';
 
-const Home: React.FC = () => (
-  <IonPage className="fade-in">
-    <IonContent class="ion-padding" fullscreen>
-      <UserToolbar />
-      <IonToolbar className="py-3">
-        <IonSearchbar mode="ios" className="ion-no-padding" placeholder="Search Favorites" />
-      </IonToolbar>
-      <section className="ion-justify-content-between d-flex">
-        <ModalContext.Consumer>
-          {
+const Home: React.FC = () => {
+  const { playlists } = useDataProvider();
+  const slidesOptions = {
+    slidesPerView: 1.5,
+    // autoHeight: true,
+  };
+  useEffect(() => {
+    playlists.getAll('5fef02bf55cd391d8de1a23d');
+    // eslint-disable-next-line
+  }, [playlists.page]);
+  return (
+    <IonPage className="fade-in">
+      <IonContent class="ion-padding" fullscreen>
+        <UserToolbar />
+        <IonToolbar className="py-3">
+          <IonSearchbar mode="ios" className="ion-no-padding" placeholder="Un album, un artiste, une chanson..." />
+        </IonToolbar>
+        <section className="ion-justify-content-between d-flex">
+          <ModalContext.Consumer>
+            {
               (modalContext) => (
                 <>
                   <IconCard
@@ -58,203 +55,72 @@ const Home: React.FC = () => (
                     icon={heartOutline}
                   />
                   <IconCard subtitle="Populaire" icon={rocketOutline} />
-                  <IconCard subtitle="Aujourd'hui" icon={laptopOutline} />
+                  <IconCard subtitle="Aujourd'hui" icon={flameOutline} />
                   <IconCard subtitle="Récent" icon={watchOutline} />
                 </>
               )
             }
-        </ModalContext.Consumer>
-      </section>
-      <section>
-        <IonListHeader className="ion-no-padding">
-          <IonLabel>Recommended</IonLabel>
-          <IonButton color="primary" fill="outline">
-            <IonIcon slot="icon-only" icon={arrowForwardOutline} />
-          </IonButton>
-        </IonListHeader>
+          </ModalContext.Consumer>
+        </section>
 
-        <IonCard className="ion-no-margin ion-margin-top">
-          <IonItem lines="none">
-            <IonIcon icon={pin} slot="start" />
-            <IonLabel>ion-item in a card, icon left, button right</IonLabel>
-            <IonButton fill="outline" slot="end">View</IonButton>
-          </IonItem>
-
-          <IonCardContent>
-            This is content, without any paragraph or header tags,
-            within an ion-cardContent element.
-          </IonCardContent>
-        </IonCard>
-
-        <IonCard className="ion-no-margin ion-margin-top">
-          <IonItem href="#" className="ion-activated">
-            <IonIcon icon={wifi} slot="start" />
-            <IonLabel>Card Link Item 1 activated</IonLabel>
-          </IonItem>
-
-          <IonItem href="#">
-            <IonIcon icon={wine} slot="start" />
-            <IonLabel>Card Link Item 2</IonLabel>
-          </IonItem>
-
-          <IonItem className="ion-activated">
-            <IonIcon icon={warning} slot="start" />
-            <IonLabel>Card Button Item 1 activated</IonLabel>
-          </IonItem>
-
-          <IonItem>
-            <IonIcon icon={walk} slot="start" />
-            <IonLabel>Card Button Item 2</IonLabel>
-          </IonItem>
-        </IonCard>
-      </section>
-      <section>
-        <IonCard className="ion-no-margin ion-margin-top">
-          <IonList>
-            {/* Sliding item with text options on both sides */}
-            <IonItemSliding>
-              <IonItemOptions side="start">
-                <IonItemOption>Favorite</IonItemOption>
-                <IonItemOption>Share</IonItemOption>
-              </IonItemOptions>
-
-              <IonItem>
-                <IonLabel>Item Options</IonLabel>
-              </IonItem>
-
-              <IonItemOptions side="end">
-                <IonItemOption>Unread</IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-
-            {/* Sliding item with expandable options on both sides */}
-            <IonItemSliding>
-              <IonItemOptions side="start">
-                <IonItemOption color="primary" expandable>
-                  Delete
-                </IonItemOption>
-              </IonItemOptions>
-
-              <IonItem>
-                <IonLabel>Expandable Options</IonLabel>
-              </IonItem>
-
-              <IonItemOptions side="end">
-                <IonItemOption color="tertiary" expandable>
-                  Archive
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-
-            {/* Multi-line sliding item with icon options on both sides */}
-            <IonItemSliding id="item100">
-              <IonItem href="#">
-                <IonLabel>
-                  <h2>HubStruck Notifications</h2>
-                  <p>A new message in your network</p>
-                  <p>Oceanic Next has joined your network</p>
-                </IonLabel>
-                <IonNote slot="end">
-                  10:45 AM
-                </IonNote>
-              </IonItem>
-
-              <IonItemOptions side="start">
-                <IonItemOption>
-                  <IonIcon slot="icon-only" icon={heart} />
-                </IonItemOption>
-              </IonItemOptions>
-
-              <IonItemOptions side="end">
-                <IonItemOption color="primary">
-                  <IonIcon slot="icon-only" icon={trash} />
-                </IonItemOption>
-                <IonItemOption>
-                  <IonIcon slot="icon-only" icon={star} />
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-
-            {/* Sliding item with icon start options on end side */}
-            <IonItemSliding>
-              <IonItem>
-                <IonLabel>
-                  Sliding Item, Icons Start
-                </IonLabel>
-              </IonItem>
-              <IonItemOptions>
-                <IonItemOption color="primary">
-                  <IonIcon slot="start" ios={ellipsisHorizontal} md={ellipsisVertical} />
-                  More
-                </IonItemOption>
-                <IonItemOption color="secondary">
-                  <IonIcon slot="start" icon={archive} />
-                  Archive
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-
-            {/* Sliding item with icon end options on end side */}
-            <IonItemSliding>
-              <IonItem>
-                <IonLabel>
-                  Sliding Item, Icons End
-                </IonLabel>
-              </IonItem>
-              <IonItemOptions>
-                <IonItemOption color="primary">
-                  <IonIcon slot="end" ios={ellipsisHorizontal} md={ellipsisVertical} />
-                  More
-                </IonItemOption>
-                <IonItemOption color="secondary">
-                  <IonIcon slot="end" icon={archive} />
-                  Archive
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-
-            {/* Sliding item with icon top options on end side */}
-            <IonItemSliding>
-              <IonItem>
-                <IonLabel>
-                  Sliding Item, Icons Top
-                </IonLabel>
-              </IonItem>
-              <IonItemOptions>
-                <IonItemOption color="primary">
-                  <IonIcon slot="top" ios={ellipsisHorizontal} md={ellipsisVertical} />
-                  More
-                </IonItemOption>
-                <IonItemOption color="secondary">
-                  <IonIcon slot="top" icon={archive} />
-                  Archive
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-
-            {/* Sliding item with icon bottom options on end side */}
-            <IonItemSliding>
-              <IonItem>
-                <IonLabel>
-                  Sliding Item, Icons Bottom
-                </IonLabel>
-              </IonItem>
-              <IonItemOptions>
-                <IonItemOption color="primary">
-                  <IonIcon slot="bottom" ios={ellipsisHorizontal} md={ellipsisVertical} />
-                  More
-                </IonItemOption>
-                <IonItemOption color="secondary">
-                  <IonIcon slot="bottom" icon={archive} />
-                  Archive
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-          </IonList>
-        </IonCard>
-      </section>
-    </IonContent>
-  </IonPage>
-);
+        <section>
+          <IonListHeader className="ion-no-padding">
+            <IonLabel>Mes playlists</IonLabel>
+            <IonButton color="primary" fill="outline">
+              <IonIcon slot="icon-only" icon={arrowForwardOutline} />
+            </IonButton>
+          </IonListHeader>
+          {
+            playlists.state.length === 0 && (
+            <IonCard button>
+              <IonCardHeader>
+                <img alt="an elephant" src="/assets/undraw/undraw_happy_music_g6wc.svg" />
+              </IonCardHeader>
+              <IonCardContent class="ion-text-center">
+                <IonCardTitle class="ion-margin-bottom">Aucune playlist</IonCardTitle>
+                <IonCardSubtitle>oops</IonCardSubtitle>
+                <IonProgressBar value={0.5} color="custom" />
+              </IonCardContent>
+            </IonCard>
+            )
+          }
+          <IonSlides pager={playlists.state.length > 0} options={slidesOptions} className="ion-no-padding">
+            {
+              playlists.state.length > 0 && playlists.state.map((projection) => (
+                <IonSlide key={projection.id}>
+                  <IonCard button>
+                    <IonCardHeader>
+                      <img alt="an elephant" src={projection.images[0].url} />
+                    </IonCardHeader>
+                    <IonCardContent class="ion-text-center">
+                      <IonCardTitle class="ion-margin-bottom">
+                        {projection.name}
+                      </IonCardTitle>
+                      <IonCardSubtitle>
+                        <div className="ion-margin-bottom">
+                          <IonBadge
+                            color={projection.public ? 'primary' : 'dark'}
+                          >
+                            {projection.public ? 'Publique' : 'Privé'}
+                          </IonBadge>
+                        </div>
+                        <div>
+                          {projection.tracks.total}
+                          {' '}
+                          Titres
+                        </div>
+                      </IonCardSubtitle>
+                      <IonProgressBar value={0.5} color="custom" />
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+              ))
+            }
+          </IonSlides>
+        </section>
+      </IonContent>
+    </IonPage>
+  );
+};
 
 export default Home;

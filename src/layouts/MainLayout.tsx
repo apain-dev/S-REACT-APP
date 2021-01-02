@@ -4,15 +4,13 @@ import {
   IonFabButton,
   IonFabList,
   IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
 } from '@ionic/react';
 import {
-  ellipseOutline,
-  homeOutline,
+  keypadOutline,
   logoAngular,
   logoChrome,
   logoFacebook,
@@ -25,7 +23,8 @@ import {
   logoTwitter,
   logoVimeo,
   logoYoutube,
-  squareOutline,
+  musicalNoteOutline,
+  personOutline,
 } from 'ionicons/icons';
 
 interface ContainerProps {
@@ -33,7 +32,7 @@ interface ContainerProps {
 }
 
 const MainLayout: React.FC<ContainerProps> = ({ children }: ContainerProps) => (
-  <>
+  <div className="main-layout">
     <IonFab vertical="center" horizontal="end" className="slide-in-left" slot="fixed">
       <IonFabButton>Share</IonFabButton>
       <IonFabList side="top">
@@ -90,20 +89,17 @@ const MainLayout: React.FC<ContainerProps> = ({ children }: ContainerProps) => (
       </IonRouterOutlet>
       <IonTabBar color="light-red" slot="bottom">
         <IonTabButton tab="home" href="/home">
-          <IonIcon icon={homeOutline} />
-          <IonLabel>Tab 1</IonLabel>
+          <IonIcon icon={musicalNoteOutline} />
         </IonTabButton>
         <IonTabButton tab="tab2" href="/tab2">
-          <IonIcon icon={ellipseOutline} />
-          <IonLabel>Tab 2</IonLabel>
+          <IonIcon icon={keypadOutline} />
         </IonTabButton>
         <IonTabButton tab="tab3" href="/tab3">
-          <IonIcon icon={squareOutline} />
-          <IonLabel>Tab 3</IonLabel>
+          <IonIcon icon={personOutline} />
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
-  </>
+  </div>
 );
 
 export default MainLayout;

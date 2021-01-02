@@ -6,9 +6,9 @@ interface ContainerProps {
 }
 
 const AuthLayout: React.FC<ContainerProps> = ({ children } : ContainerProps) => (
-  <>
+  <div className="auth-layout">
     {children}
-  </>
+  </div>
 );
 
 export default AuthLayout;

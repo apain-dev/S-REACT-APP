@@ -21,7 +21,7 @@ const App: React.FC = () => (
         cssClass="my-custom-class"
         isOpen
         message="Please wait..."
-        duration={5000}
+        duration={1000}
       />
       <ModalHandler />
       <IonReactRouter>
