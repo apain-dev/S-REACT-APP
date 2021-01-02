@@ -11,38 +11,47 @@ import Register from './pages/register/Register';
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import ModalHandler from './components/ModalHandler/ModalHandler';
-import ModalProvider from './components/ModalHandler/ModalProvider';
+import ModalProvider from './contexts/ModalProvider';
+import PlaylistID from './pages/playlistID/PlaylistID';
+import AppProvider from './contexts/AppProvider';
 
 const App: React.FC = () => (
   <IonApp className="outworld">
-    <ModalProvider>
-      <IonLoading
-        spinner="bubbles"
-        cssClass="my-custom-class"
-        isOpen
-        message="Please wait..."
-        duration={1000}
-      />
-      <ModalHandler />
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route path="/" render={() => <Redirect to="/register" />} exact />
-          <Route path="/register">
-            <AuthLayout>
-              <Register />
-            </AuthLayout>
-          </Route>
-          <Route path="">
-            <MainLayout>
-              <Route path="/home" component={Home} exact />
-              <Route path="/tab2" component={Tab2} exact />
-              <Route path="/tab3" component={Tab3} />
-            </MainLayout>
-          </Route>
-        </IonRouterOutlet>
+    <AppProvider>
+      <ModalProvider>
+        <IonLoading
+          spinner="bubbles"
+          cssClass="my-custom-class"
+          isOpen
+          message="Please wait..."
+          duration={1000}
+        />
+        <ModalHandler />
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route path="/" render={() => <Redirect to="/register" />} exact />
+            <Route path="/register">
+              <AuthLayout>
+                <Register />
+              </AuthLayout>
+            </Route>
+            <Route path="">
+              <MainLayout>
+                <Route path="/home" component={Home} exact />
+                <Route path="/tab2" component={Tab2} exact />
+                <Route path="/tab3" component={Tab3} />
+              </MainLayout>
+              <Route path="/playlists/:id">
+                <AuthLayout>
+                  <PlaylistID />
+                </AuthLayout>
+              </Route>
+            </Route>
+          </IonRouterOutlet>
 
-      </IonReactRouter>
-    </ModalProvider>
+        </IonReactRouter>
+      </ModalProvider>
+    </AppProvider>
   </IonApp>
 );
 

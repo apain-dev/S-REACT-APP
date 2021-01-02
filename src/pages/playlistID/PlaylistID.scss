@@ -1,0 +1,7 @@
+@import '../../theme/mixins/_responsive-ratio.scss';
+
+ion-card {
+  img {
+    transform: scale(1.05);
+  }
+}

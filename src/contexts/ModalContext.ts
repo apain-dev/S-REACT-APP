@@ -5,16 +5,13 @@ interface ContainerProps {
   isOpen: boolean,
   props: {},
   // eslint-disable-next-line no-unused-vars
-  setVisibility: (visible: boolean) => void,
-  setClose: () => void
+  set: (a: any) => void;
 }
 
 const ModalContext = React.createContext<ContainerProps>({
   isOpen: false,
   props: {},
-  // eslint-disable-next-line no-unused-vars
-  setVisibility: (visible: boolean) => {},
-  setClose: () => {},
+  set: () => {},
 });
 
 export default ModalContext;

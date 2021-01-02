@@ -25,18 +25,19 @@ import {
 import IconCard from '../../components/cards/IconCard/IconCard';
 import UserToolbar from '../../components/userToolbar/UserToolbar';
 import ModalContext from '../../contexts/ModalContext';
-import useDataProvider from '../../hooks/useDataProvider';
+import usePlaylists from '../../hooks/usePlaylists';
 
 const Home: React.FC = () => {
-  const { playlists } = useDataProvider();
+  const { playlistsAdapter } = usePlaylists();
   const slidesOptions = {
     slidesPerView: 1.5,
     // autoHeight: true,
   };
   useEffect(() => {
-    playlists.getAll('5fef02bf55cd391d8de1a23d');
+    playlistsAdapter.getMany('5fef02bf55cd391d8de1a23d');
     // eslint-disable-next-line
-  }, [playlists.page]);
+  }, [playlistsAdapter.offsetAdapter.offset]);
+
   return (
     <IonPage className="fade-in">
       <IonContent class="ion-padding" fullscreen>
@@ -51,7 +52,9 @@ const Home: React.FC = () => {
                 <>
                   <IconCard
                     subtitle="Favoris"
-                    onClick={() => modalContext.setVisibility(!modalContext.isOpen)}
+                    onClick={() => modalContext.set(
+                      { ...modalContext, isOpen: !modalContext.isOpen },
+                    )}
                     icon={heartOutline}
                   />
                   <IconCard subtitle="Populaire" icon={rocketOutline} />
@@ -71,24 +74,25 @@ const Home: React.FC = () => {
             </IonButton>
           </IonListHeader>
           {
-            playlists.state.length === 0 && (
-            <IonCard button>
-              <IonCardHeader>
-                <img alt="an elephant" src="/assets/undraw/undraw_happy_music_g6wc.svg" />
-              </IonCardHeader>
-              <IonCardContent class="ion-text-center">
-                <IonCardTitle class="ion-margin-bottom">Aucune playlist</IonCardTitle>
-                <IonCardSubtitle>oops</IonCardSubtitle>
-                <IonProgressBar value={0.5} color="custom" />
-              </IonCardContent>
-            </IonCard>
+            playlistsAdapter.playlists.length === 0 && (
+              <IonCard button>
+                <IonCardHeader>
+                  <img alt="an elephant" src="/assets/undraw/undraw_happy_music_g6wc.svg" />
+                </IonCardHeader>
+                <IonCardContent class="ion-text-center">
+                  <IonCardTitle class="ion-margin-bottom">Aucune playlist</IonCardTitle>
+                  <IonCardSubtitle>oops</IonCardSubtitle>
+                  <IonProgressBar value={0.5} color="custom" />
+                </IonCardContent>
+              </IonCard>
             )
           }
-          <IonSlides pager={playlists.state.length > 0} options={slidesOptions} className="ion-no-padding">
+          <IonSlides pager={playlistsAdapter.playlists.length > 0} options={slidesOptions} className="ion-no-padding">
             {
-              playlists.state.length > 0 && playlists.state.map((projection) => (
+              playlistsAdapter.playlists.length > 0
+              && playlistsAdapter.playlists.map((projection) => (
                 <IonSlide key={projection.id}>
-                  <IonCard button>
+                  <IonCard button routerLink={`/playlists/${projection.id}`}>
                     <IonCardHeader>
                       <img alt="an elephant" src={projection.images[0].url} />
                     </IonCardHeader>
