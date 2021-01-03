@@ -43,7 +43,7 @@ const Register: React.FC = () => {
       .then((result) => {
         if (!result.code) {
           setUser(result);
-          history.push('/home');
+          history.push('/login');
         } else {
           setToast({ isOpen: true, text: result.message });
         }

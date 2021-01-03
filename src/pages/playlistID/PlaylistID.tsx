@@ -86,7 +86,7 @@ const PlaylistID: React.FC = () => {
             }
             {
               tracks.map((track) => (
-                <IonItemSliding>
+                <IonItemSliding key={track.track.id}>
                   <IonItem>
                     <IonLabel>{track.track.name}</IonLabel>
                   </IonItem>

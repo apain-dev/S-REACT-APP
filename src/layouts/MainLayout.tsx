@@ -28,20 +28,33 @@ import {
 } from 'ionicons/icons';
 import useApp from '../hooks/useApp';
 import useModal from '../hooks/useModal';
+import useAuth from '../hooks/useAuth';
+import ModalReconnect from '../components/modals/ModalReconnect/ModalReconnect';
 
 interface ContainerProps {
   children: any;
 }
 
 const MainLayout: React.FC<ContainerProps> = ({ children }: ContainerProps) => {
-  const { appState } = useApp();
-  const { openSpotify } = useModal();
+  const { setUser } = useApp();
+  const { openSpotify, openModal } = useModal();
+  const { getAccount } = useAuth();
   useEffect(() => {
-    if (appState.user && (appState.user.spotify === undefined || !appState.user.spotify)) {
-      openSpotify();
+    const token = localStorage.getItem('OW_ACCESS_TOKEN');
+    if (token) {
+      getAccount(token).then((getAccountResult: any) => {
+        if (getAccountResult.code) {
+          openModal(ModalReconnect, { lines: 'one-line', isClosable: false, mode: 'ios' });
+        } else {
+          setUser(getAccountResult);
+          if (!getAccountResult.spotify) {
+            openSpotify();
+          }
+        }
+      });
     }
     // eslint-disable-next-line
-  }, [appState]);
+  }, [])
   return (
     <div className="main-layout">
       <IonFab vertical="center" horizontal="end" className="slide-in-left" slot="fixed">
