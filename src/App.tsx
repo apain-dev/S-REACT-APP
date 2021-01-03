@@ -14,45 +14,60 @@ import ModalHandler from './components/ModalHandler/ModalHandler';
 import PlaylistID from './pages/playlistID/PlaylistID';
 import ModalProvider from './contexts/ModalProvider';
 import AppProvider from './contexts/AppProvider';
+import useApp from './hooks/useApp';
+import Login from './pages/login/Login';
 
-const App: React.FC = () => (
-  <IonApp className="outworld">
-    <AppProvider>
-      <ModalProvider>
-        <IonLoading
-          spinner="bubbles"
-          cssClass="my-custom-class"
-          isOpen
-          message="Please wait..."
-          duration={1000}
-        />
-        <ModalHandler />
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path="/" render={() => <Redirect to="/register" />} exact />
-            <Route path="/register">
-              <AuthLayout>
-                <Register />
-              </AuthLayout>
-            </Route>
-            <Route path="">
-              <MainLayout>
-                <Route path="/home" component={Home} exact />
-                <Route path="/tab2" component={Tab2} exact />
-                <Route path="/tab3" component={Tab3} />
-              </MainLayout>
-              <Route path="/playlists/:id">
+const App: React.FC = () => {
+  const { user } = useApp();
+  return (
+    <IonApp className="outworld">
+      <AppProvider>
+        <ModalProvider>
+          <IonLoading
+            spinner="bubbles"
+            cssClass="my-custom-class"
+            isOpen
+            message="Please wait..."
+            duration={1000}
+          />
+          <ModalHandler />
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route path="/" render={() => <Redirect to="/home" />} exact />
+              <Route path="/register">
                 <AuthLayout>
-                  <PlaylistID />
+                  <Register />
                 </AuthLayout>
               </Route>
-            </Route>
-          </IonRouterOutlet>
+              <Route path="/login">
+                <AuthLayout>
+                  <Login />
+                </AuthLayout>
+              </Route>
+              <Route
+                path=""
+              >
+                {
+                  user === undefined ? (<Redirect to="/register" />) : null
+                }
+                <MainLayout>
+                  <Route path="/home" component={Home} exact />
+                  <Route path="/tab2" component={Tab2} exact />
+                  <Route path="/tab3" component={Tab3} />
+                </MainLayout>
+                <Route path="/playlists/:id">
+                  <AuthLayout>
+                    <PlaylistID />
+                  </AuthLayout>
+                </Route>
+              </Route>
+            </IonRouterOutlet>
 
-        </IonReactRouter>
-      </ModalProvider>
-    </AppProvider>
-  </IonApp>
-);
+          </IonReactRouter>
+        </ModalProvider>
+      </AppProvider>
+    </IonApp>
+  );
+};
 
 export default App;

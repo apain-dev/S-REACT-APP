@@ -19,7 +19,7 @@ const UserToolbar: React.FC<ContainerProps> = () => {
             <h5><IonText color="medium">Good morning,</IonText></h5>
             <h1 className="ion-no-margin font-bold">
               <IonText color="primary">
-                {user || '{user}'}
+                {user?.firstName || '{user}'}
               </IonText>
             </h1>
           </div>

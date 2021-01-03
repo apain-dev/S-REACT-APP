@@ -1,17 +1,25 @@
 import React, { Dispatch } from 'react';
-import { Playlist } from '../types';
+import { AuthUser, Playlist } from '../types';
 
 interface ContainerProps {
   albums: [];
   playlists: Playlist[];
-  user: string | undefined;
+  user: AuthUser | undefined;
   set: Dispatch<ContainerProps>;
 }
+
+const getUser = () => {
+  const user = localStorage.getItem('OW_USER');
+  if (!user) {
+    return undefined;
+  }
+  return (JSON.parse(user));
+};
 
 const AppContext = React.createContext<ContainerProps>({
   albums: [],
   playlists: [],
-  user: undefined,
+  user: getUser(),
   set: () => {},
 });
 

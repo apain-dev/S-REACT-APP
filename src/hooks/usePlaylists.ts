@@ -32,6 +32,11 @@ const usePlaylists = () => {
     return newPlaylists;
   };
 
+  const getTracks = async (userID: string, playlistID: string) => {
+    const tracks = await RequestService.getPlaylistTracks(userID, playlistID, 0);
+    return (tracks);
+  };
+
   return {
     playlistsAdapter: {
       playlists,
@@ -40,6 +45,7 @@ const usePlaylists = () => {
         offset,
         setOffset,
       },
+      getTracks,
       createOne,
       updateOne,
       deleteOne,

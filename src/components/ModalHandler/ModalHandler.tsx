@@ -7,16 +7,38 @@ interface ContainerProps {
 }
 
 // eslint-disable-next-line react/prop-types
-const ModalHandler: React.FC<ContainerProps> = () => (
-  <ModalContext.Consumer>
-    {
+const ModalHandler: React.FC<ContainerProps> = () => {
+  const renderModal = (modalState: any) => {
+    const ActiveModal = modalState.content;
+    if (!ActiveModal) {
+      return null;
+    }
+    return <ActiveModal />;
+  };
+
+  const dismiss = (modalState: any) => {
+    if (modalState.isClosable) {
+      modalState.set({ ...modalState, isOpen: false });
+    }
+  };
+  return (
+    <ModalContext.Consumer>
+      {
         (modalState) => (
-          <IonModal mode={modalState.mode} animated={modalState.animated} swipeToClose showBackdrop={modalState.showBackdrop} isOpen={modalState.isOpen} cssClass="my-custom-class" onDidDismiss={() => modalState.set({ ...modalState, isOpen: false })}>
-            <p>YEAHHHH</p>
+          <IonModal
+            mode={modalState.mode}
+            animated={modalState.animated}
+            showBackdrop={modalState.showBackdrop}
+            isOpen={modalState.isOpen}
+            cssClass={modalState.lines}
+            onDidDismiss={() => dismiss(modalState)}
+          >
+            {renderModal(modalState)}
           </IonModal>
         )
       }
-  </ModalContext.Consumer>
-);
+    </ModalContext.Consumer>
+  );
+};
 
 export default ModalHandler;

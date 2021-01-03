@@ -23,15 +23,23 @@ import usePlaylists from '../../hooks/usePlaylists';
 import { Playlist } from '../../types';
 import ModalContext from '../../contexts/ModalContext';
 import useModal from '../../hooks/useModal';
+import useApp from '../../hooks/useApp';
 
 const PlaylistID: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { user } = useApp();
   const { playlistsAdapter } = usePlaylists();
   const { setVisibility } = useModal();
   const [currentPlaylist, setCurrentPlaylist] = useState<Playlist>();
 
   useEffect(() => {
-    playlistsAdapter.getOne(id).then((item) => setCurrentPlaylist(item));
+    if (user) {
+      playlistsAdapter.getOne(id).then((item) => {
+        setCurrentPlaylist(item);
+        // eslint-disable-next-line no-underscore-dangle
+        playlistsAdapter.getTracks(user._id, id);
+      });
+    }
     // eslint-disable-next-line
   }, [id]);
 

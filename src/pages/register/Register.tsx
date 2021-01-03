@@ -1,66 +1,134 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  IonButton, IonIcon,
-  IonContent, IonPage, IonSlide, IonSlides, IonText,
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonPage,
+  IonSearchbar,
+  IonSlide,
+  IonSlides,
+  IonText,
+  IonToast,
 } from '@ionic/react';
 import './Register.css';
 import { useHistory } from 'react-router';
-import useApp from '../../hooks/useApp';
+import {
+  arrowForwardOutline, at, lockClosed, personOutline,
+} from 'ionicons/icons';
+import useAuth from '../../hooks/useAuth';
+
+interface UserVM {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const Register: React.FC = () => {
   const history = useHistory();
-  const { setUser } = useApp();
+  const { createUser, setUser } = useAuth();
+  const [toast, setToast] = useState({ isOpen: false, text: '' });
+  const [userVM, setUserVM] = useState<UserVM>({
+    email: '',
+    confirmPassword: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+  });
   const register = () => {
-    setUser('Azword');
-    history.push('/home');
+    createUser(
+      userVM.firstName, userVM.lastName, userVM.email, userVM.password, userVM.confirmPassword,
+    )
+      .then((result) => {
+        if (!result.code) {
+          setUser(result);
+          history.push('/home');
+        } else {
+          setToast({ isOpen: true, text: result.message });
+        }
+      });
   };
   return (
     <IonPage className="fade-in">
       <IonContent color="dark" class="ion-padding" fullscreen>
+        <IonToast
+          cssClass="ion-text-center"
+          isOpen={toast.isOpen}
+          color="warning"
+          onDidDismiss={() => setToast({ isOpen: false, text: '' })}
+          message={toast.text}
+          duration={5000}
+        />
         <IonSlides>
 
           <IonSlide>
             <div className="slide">
               <img alt="an elephant" src="/assets/undraw/undraw_happy_music_g6wc.svg" />
-              <h2>Welcome</h2>
+              <h2>Bienvenue !</h2>
               <p>
-                The
-                <IonText color="primary"> ionic conference app</IonText>
+                Voici
+                <IonText color="primary"> JS-Spotify </IonText>
                 {' '}
-                is a practical preview of the ionic framework in action, and a
-                demonstration of proper code use.
+                une application réalisée dans le but du module Javascript à Epitech.
               </p>
             </div>
           </IonSlide>
 
           <IonSlide>
-            <img alt="an elephant" src="/assets/undraw/undraw_walking_outside_5ueb.svg" />
-            <h2>What is Ionic?</h2>
-            <p>
-              <IonText color="primary"> Ionic Framework</IonText>
-              {' '}
-              is an open source SDK that enables developers to build high quality mobile apps with
-              web technologies like HTML, CSS, and JavaScript.
-            </p>
-          </IonSlide>
-
-          <IonSlide>
-            <img alt="an elephant" src="/assets/undraw/undraw_Relaxing_at_home_re_mror.svg" />
-            <h2>What is Ionic Appflow?</h2>
-            <p>
-              <IonText color="primary"> Ionic AppFlow</IonText>
-              {' '}
-              is a powerful set of services and features built on top of Ionic Framework that brings
-              a totally new level of app development agility to mobile dev teams.
-            </p>
-          </IonSlide>
-
-          <IonSlide>
-            <img alt="an elephant" src="/assets/undraw/undraw_walking_outside_5ueb.svg" />
-            <h2>Ready to Play?</h2>
-            <IonButton fill="clear" onClick={() => register()}>
-              Continue
-              <IonIcon slot="end" icon="arrow-forward" />
+            <h2 className="ion-margin-bottom">INSCRIPTION</h2>
+            <IonSearchbar
+              className="ion-margin-top"
+              color="seashell"
+              value={userVM.firstName}
+              placeholder="Jackie"
+              type="text"
+              searchIcon={personOutline}
+              mode="ios"
+              onIonChange={(e) => setUserVM({ ...userVM, firstName: e.detail.value || '' })}
+            />
+            <IonSearchbar
+              color="seashell"
+              value={userVM.lastName}
+              placeholder="Tuning"
+              searchIcon={personOutline}
+              type="text"
+              mode="ios"
+              onIonChange={(e) => setUserVM({ ...userVM, lastName: e.detail.value || '' })}
+            />
+            <IonSearchbar
+              color="seashell"
+              value={userVM.email}
+              searchIcon={at}
+              type="email"
+              placeholder="jackie.tuning@gmail.com"
+              mode="ios"
+              onIonChange={(e) => setUserVM({ ...userVM, email: e.detail.value || '' })}
+            />
+            <IonSearchbar
+              color="seashell"
+              value={userVM.password}
+              type="password"
+              searchIcon={lockClosed}
+              placeholder="qz@sdf!z57"
+              mode="ios"
+              onIonChange={(e) => setUserVM({ ...userVM, password: e.detail.value || '' })}
+            />
+            <IonSearchbar
+              color="seashell"
+              type="password"
+              value={userVM.confirmPassword}
+              searchIcon={lockClosed}
+              placeholder="qz@sdf!z57"
+              mode="ios"
+              onIonChange={(e) => setUserVM({ ...userVM, confirmPassword: e.detail.value || '' })}
+            />
+            <IonButton color="primary" onClick={() => register()}>
+              S&apos;inscrire
+              <IonIcon slot="end" icon={arrowForwardOutline} />
+            </IonButton>
+            <IonButton size="small" fill="clear" routerLink="/login">
+              J&apos;ai déjà un compte
             </IonButton>
           </IonSlide>
 

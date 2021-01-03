@@ -26,9 +26,11 @@ import IconCard from '../../components/cards/IconCard/IconCard';
 import UserToolbar from '../../components/userToolbar/UserToolbar';
 import usePlaylists from '../../hooks/usePlaylists';
 import ModalContext from '../../contexts/ModalContext';
+import useModal from '../../hooks/useModal';
 
 const Home: React.FC = () => {
   const { playlistsAdapter } = usePlaylists();
+  const { openSpotify } = useModal();
   const slidesOptions = {
     slidesPerView: 1.5,
     // autoHeight: true,
@@ -48,11 +50,11 @@ const Home: React.FC = () => {
         <section className="ion-justify-content-between d-flex">
           <ModalContext.Consumer>
             {
-              (modalState) => (
+              () => (
                 <>
                   <IconCard
                     subtitle="Favoris"
-                    onClick={() => modalState.set({ ...modalState, isOpen: true })}
+                    onClick={() => openSpotify()}
                     icon={heartOutline}
                   />
                   <IconCard subtitle="Populaire" icon={rocketOutline} />

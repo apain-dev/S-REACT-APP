@@ -1,6 +1,15 @@
 /* PLAYLISTS  */
 import { Playlist } from '../types';
 
+/* PLAYER */
+const getPlaylistTracks = async (userID: string, playlistID: string, offset: number): Promise<any> => fetch(`https://js-api.enoviah.fr/spotify/${userID}/playlists/${playlistID}/tracks?offset=${offset}`, {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+});
+
 const getPlaylists = async (userID: string, offset: number): Promise<Playlist[]> => fetch(`https://js-api.enoviah.fr/spotify/${userID}/playlists?offset=${offset}`, {
   method: 'GET',
   headers: {
@@ -42,6 +51,37 @@ const getPlayer = async (userID: string): Promise<any> => fetch(`https://js-api.
   },
 });
 
+/* AUTH */
+const createUser = async (firstName: string, lastName: string, email: string, password: string, confirmPassword: string): Promise<any> => fetch('https://js-api.enoviah.fr/users', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+  }),
+}).then((data) => data.json());
+
+const login = async (email: string, password: string): Promise<any> => fetch('https://auth.outworld.fr/oauth/token', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    username: email,
+    password,
+    client_id: 'XDXL4KsZd6oKgNga',
+    client_secret: 'DmH1kk5Ssqb2P3DesyDG7QYhsBo5EJAy',
+    grant_type: 'password',
+  }),
+}).then((data) => data.json());
+
 export default {
-  getPlaylists, postPlaylists, postTrackInPlaylist, getPlayer,
+  getPlaylists, postPlaylists, postTrackInPlaylist, getPlayer, createUser, login, getPlaylistTracks,
 };
