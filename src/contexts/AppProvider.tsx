@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AppContext from './AppContext';
-import useApp from '../hooks/useApp';
 
 interface ContainerProps {
   children: any;
@@ -8,9 +7,21 @@ interface ContainerProps {
 
 // eslint-disable-next-line react/prop-types
 const AppProvider: React.FC<ContainerProps> = ({ children }: ContainerProps) => {
-  const { appState, setAppState } = useApp();
+  const appContext = useContext(AppContext);
+  const [state, setState] = useState(appContext);
+  const getUser = () => {
+    const user = localStorage.getItem('OW_USER');
+    if (!user) {
+      return undefined;
+    }
+    return (JSON.parse(user));
+  };
+  useEffect(() => {
+    setState({ ...state, user: getUser() });
+    // eslint-disable-next-line
+  }, [])
   return (
-    <AppContext.Provider value={{ ...appState, set: setAppState }}>
+    <AppContext.Provider value={{ ...state, set: setState }}>
       {children}
     </AppContext.Provider>
   );

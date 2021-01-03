@@ -8,18 +8,10 @@ interface ContainerProps {
   set: Dispatch<ContainerProps>;
 }
 
-const getUser = () => {
-  const user = localStorage.getItem('OW_USER');
-  if (!user) {
-    return undefined;
-  }
-  return (JSON.parse(user));
-};
-
 const AppContext = React.createContext<ContainerProps>({
   albums: [],
   playlists: [],
-  user: getUser(),
+  user: undefined,
   set: () => {},
 });
 

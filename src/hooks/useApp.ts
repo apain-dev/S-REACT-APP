@@ -3,20 +3,20 @@ import AppContext from '../contexts/AppContext';
 import { AuthUser } from '../types';
 
 const useApp = () => {
-  const appContext = useContext(AppContext);
-  const [appState, setAppState] = useState(appContext);
-  const [_user, _setUser] = useState(appState.user);
+  const appContext = useContext(AppContext); // NO
+  // eslint-disable-next-line no-unused-vars
+  const [_user, _setUser] = useState(appContext.user); // NO
 
-  const setUser = (user: AuthUser) => {
-    _setUser(user);
-    setAppState({ ...appState, user });
-    appContext.set({ ...appState, user });
-    localStorage.setItem('OW_USER', JSON.stringify(user));
+  const setUser = (user?: AuthUser) => {
+    appContext.set({ ...appContext, user });
+    if (user) {
+      localStorage.setItem('OW_USER', JSON.stringify(user));
+    }
   };
 
   return {
-    appState,
-    setAppState,
+    appState: appContext,
+    setAppState: appContext.set,
     user: _user,
     setUser,
   };

@@ -20,24 +20,26 @@ import './PlaylistID.scss';
 import { useParams } from 'react-router';
 import { ellipsisHorizontal, ellipsisVertical } from 'ionicons/icons';
 import usePlaylists from '../../hooks/usePlaylists';
-import { Playlist } from '../../types';
-import ModalContext from '../../contexts/ModalContext';
-import useModal from '../../hooks/useModal';
+import { Playlist, Track } from '../../types';
 import useApp from '../../hooks/useApp';
 
 const PlaylistID: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user } = useApp();
   const { playlistsAdapter } = usePlaylists();
-  const { setVisibility } = useModal();
   const [currentPlaylist, setCurrentPlaylist] = useState<Playlist>();
+  const [tracks, setTracks] = useState<Track[]>([]);
 
   useEffect(() => {
     if (user) {
       playlistsAdapter.getOne(id).then((item) => {
         setCurrentPlaylist(item);
         // eslint-disable-next-line no-underscore-dangle
-        playlistsAdapter.getTracks(user._id, id);
+        playlistsAdapter.getTracks(user._id, id)
+          .then((playlistTracks) => {
+            console.info(playlistTracks);
+            setTracks(playlistTracks);
+          });
       });
     }
     // eslint-disable-next-line
@@ -48,7 +50,7 @@ const PlaylistID: React.FC = () => {
       <IonContent fullscreen>
         <section className="ion-padding">
           <IonHeader className="ion-no-border">
-            <IonToolbar color="seashell">
+            <IonToolbar color="seashell" className="ion-no-padding">
               <div slot="start">
                 <IonBackButton color="dark" defaultHref="home" />
               </div>
@@ -63,22 +65,30 @@ const PlaylistID: React.FC = () => {
             <img alt="an elephant" src={currentPlaylist?.images[0]?.url || '/assets/card-album.png'} />
           </IonCard>
         </section>
-        <ModalContext.Consumer>
-          {
-            (modalState) => (
-              <IonButton onClick={() => setVisibility(true)}>
-                {modalState.mode}
-              </IonButton>
-            )
-          }
-        </ModalContext.Consumer>
         <IonCard className="ion-no-margin ion-padding">
           <IonList>
             {
-              ([''].fill('', 0, currentPlaylist?.tracks.total)).map((track) => (
+              tracks?.length === 0
+                ? (
+                  <IonItemSliding>
+                    <IonItem className="ion-text-center">
+                      <IonLabel>Aucune musique</IonLabel>
+                    </IonItem>
+                    <IonItemOptions side="end">
+                      <IonItemOption onClick={() => {
+                      }}
+                      >
+                        Unread
+                      </IonItemOption>
+                    </IonItemOptions>
+                  </IonItemSliding>
+                ) : null
+            }
+            {
+              tracks.map((track) => (
                 <IonItemSliding>
                   <IonItem>
-                    <IonLabel>{track}</IonLabel>
+                    <IonLabel>{track.track.name}</IonLabel>
                   </IonItem>
                   <IonItemOptions side="end">
                     <IonItemOption onClick={() => {

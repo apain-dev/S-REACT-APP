@@ -27,18 +27,24 @@ import UserToolbar from '../../components/userToolbar/UserToolbar';
 import usePlaylists from '../../hooks/usePlaylists';
 import ModalContext from '../../contexts/ModalContext';
 import useModal from '../../hooks/useModal';
+import useApp from '../../hooks/useApp';
 
 const Home: React.FC = () => {
   const { playlistsAdapter } = usePlaylists();
+  const { appState } = useApp();
   const { openSpotify } = useModal();
   const slidesOptions = {
     slidesPerView: 1.5,
     // autoHeight: true,
   };
   useEffect(() => {
-    playlistsAdapter.getMany('5fef02bf55cd391d8de1a23d');
+    // eslint-disable-next-line no-underscore-dangle
+    if (appState.user?._id && appState.user?.spotify) {
+      // eslint-disable-next-line no-underscore-dangle
+      playlistsAdapter.getMany(appState.user?._id);
+    }
     // eslint-disable-next-line
-  }, [playlistsAdapter.offsetAdapter.offset]);
+  }, [appState]);
 
   return (
     <IonPage className="fade-in">

@@ -1,6 +1,6 @@
 {
   "name": "@outworld/js-spotify",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "private": true,
   "dependencies": {
     "@capacitor/android": "^2.4.5",

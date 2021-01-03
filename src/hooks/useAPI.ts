@@ -7,6 +7,7 @@ const useAPI = () => ({
   postPlaylists: RequestService.postPlaylists,
   createUser: RequestService.createUser,
   login: RequestService.login,
+  getAccount: RequestService.getAccount,
 });
 
 export default useAPI;

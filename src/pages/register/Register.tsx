@@ -50,7 +50,7 @@ const Register: React.FC = () => {
       });
   };
   return (
-    <IonPage className="fade-in">
+    <IonPage className="">
       <IonContent color="dark" class="ion-padding" fullscreen>
         <IonToast
           cssClass="ion-text-center"
@@ -127,7 +127,7 @@ const Register: React.FC = () => {
               S&apos;inscrire
               <IonIcon slot="end" icon={arrowForwardOutline} />
             </IonButton>
-            <IonButton size="small" fill="clear" routerLink="/login">
+            <IonButton size="small" fill="clear" routerLink="/login" routerDirection="root">
               J&apos;ai déjà un compte
             </IonButton>
           </IonSlide>

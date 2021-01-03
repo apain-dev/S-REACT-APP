@@ -23,7 +23,7 @@ interface UserVM {
 
 const Login: React.FC = () => {
   const history = useHistory();
-  const { login, setUser } = useAuth();
+  const { login, setUser, getAccount } = useAuth();
   const [toast, setToast] = useState({ isOpen: false, text: '' });
   const [userVM, setUserVM] = useState<UserVM>({
     email: '',
@@ -35,15 +35,17 @@ const Login: React.FC = () => {
     )
       .then((result) => {
         if (!result.code) {
-          setUser(result);
-          history.push('/home');
+          getAccount(result.access_token).then((data) => {
+            setUser(data);
+            history.push('/home');
+          });
         } else {
           setToast({ isOpen: true, text: result.message });
         }
       });
   };
   return (
-    <IonPage className="fade-in">
+    <IonPage className="">
       <IonContent color="dark" class="ion-padding" fullscreen>
         <IonToast
           cssClass="ion-text-center"
@@ -74,11 +76,11 @@ const Login: React.FC = () => {
               mode="ios"
               onIonChange={(e) => setUserVM({ ...userVM, password: e.detail.value || '' })}
             />
-            <IonButton color="primary" onClick={() => loginVM()}>
+            <IonButton color="primary" onClick={() => loginVM()} routerDirection="root">
               Se connecter
               <IonIcon slot="end" icon={arrowForwardOutline} />
             </IonButton>
-            <IonButton className="ion-margin-top" size="small" fill="clear" routerLink="/login">
+            <IonButton className="ion-margin-top" size="small" fill="clear" routerLink="/register" routerDirection="root">
               Je n&apos;ai pas de compte
             </IonButton>
           </IonSlide>

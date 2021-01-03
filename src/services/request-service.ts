@@ -1,14 +1,15 @@
 /* PLAYLISTS  */
-import { Playlist } from '../types';
+import { AuthUser, Playlist, Track } from '../types';
 
 /* PLAYER */
-const getPlaylistTracks = async (userID: string, playlistID: string, offset: number): Promise<any> => fetch(`https://js-api.enoviah.fr/spotify/${userID}/playlists/${playlistID}/tracks?offset=${offset}`, {
+// eslint-disable-next-line no-undef
+const getPlaylistTracks = async (userID: string, playlistID: string, offset: number): Promise<Track[]> => fetch(`https://js-api.enoviah.fr/spotify/${userID}/playlists/${playlistID}/tracks?offset=${offset}`, {
   method: 'GET',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
-});
+}).then((data) => data.json()).then((data) => data.results);
 
 const getPlaylists = async (userID: string, offset: number): Promise<Playlist[]> => fetch(`https://js-api.enoviah.fr/spotify/${userID}/playlists?offset=${offset}`, {
   method: 'GET',
@@ -82,6 +83,22 @@ const login = async (email: string, password: string): Promise<any> => fetch('ht
   }),
 }).then((data) => data.json());
 
+const getAccount = async (accessToken: string): Promise<AuthUser> => fetch('https://js-api.enoviah.fr/account', {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  },
+}).then((data) => data.json());
+
 export default {
-  getPlaylists, postPlaylists, postTrackInPlaylist, getPlayer, createUser, login, getPlaylistTracks,
+  getPlaylists,
+  postPlaylists,
+  postTrackInPlaylist,
+  getPlayer,
+  createUser,
+  login,
+  getPlaylistTracks,
+  getAccount,
 };
