@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import { Playlist } from '../types';
 
 interface ContainerProps {
   albums: [];
   playlists: Playlist[];
-  user: undefined;
-  // eslint-disable-next-line no-unused-vars
-  set: (a: any) => void;
+  user: string | undefined;
+  set: Dispatch<ContainerProps>;
 }
 
 const AppContext = React.createContext<ContainerProps>({
@@ -15,5 +14,7 @@ const AppContext = React.createContext<ContainerProps>({
   user: undefined,
   set: () => {},
 });
+
+AppContext.displayName = 'AppContext';
 
 export default AppContext;

@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   IonButton, IonIcon,
   IonContent, IonPage, IonSlide, IonSlides, IonText,
 } from '@ionic/react';
 import './Register.css';
 import { useHistory } from 'react-router';
-import AppContext from '../../contexts/AppContext';
+import useApp from '../../hooks/useApp';
 
 const Register: React.FC = () => {
   const history = useHistory();
-  const appContext = useContext(AppContext);
+  const { setUser } = useApp();
   const register = () => {
-    appContext.set({ ...appContext, user: 'Azword' });
+    setUser('Azword');
     history.push('/home');
   };
   return (

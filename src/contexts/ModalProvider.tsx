@@ -1,18 +1,18 @@
-import React, { useContext, useState } from 'react';
-import '../components/ModalHandler/ModalHandler.scss';
+import React from 'react';
 import ModalContext from './ModalContext';
+import useModal from '../hooks/useModal';
 
 interface ContainerProps {
   children: any;
 }
 
 // eslint-disable-next-line react/prop-types
-const ModalProvider: React.FC<ContainerProps> = ({ children } : ContainerProps) => {
-  const modalContext = useContext(ModalContext);
-  const [modalState, setModalState] = useState(modalContext);
-  modalState.set = setModalState;
+const ModalProvider: React.FC<ContainerProps> = ({ children }: ContainerProps) => {
+  const { modalState, setModalState } = useModal();
   return (
-    <ModalContext.Provider value={modalState}>{children}</ModalContext.Provider>
+    <ModalContext.Provider value={{ ...modalState, set: setModalState }}>
+      {children}
+    </ModalContext.Provider>
   );
 };
 

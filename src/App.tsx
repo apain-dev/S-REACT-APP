@@ -11,8 +11,8 @@ import Register from './pages/register/Register';
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import ModalHandler from './components/ModalHandler/ModalHandler';
-import ModalProvider from './contexts/ModalProvider';
 import PlaylistID from './pages/playlistID/PlaylistID';
+import ModalProvider from './contexts/ModalProvider';
 import AppProvider from './contexts/AppProvider';
 
 const App: React.FC = () => (

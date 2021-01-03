@@ -1,18 +1,18 @@
-import React, { useContext, useState } from 'react';
-import '../components/ModalHandler/ModalHandler.scss';
+import React from 'react';
 import AppContext from './AppContext';
+import useApp from '../hooks/useApp';
 
 interface ContainerProps {
   children: any;
 }
 
 // eslint-disable-next-line react/prop-types
-const AppProvider: React.FC<ContainerProps> = ({ children } : ContainerProps) => {
-  const appContext = useContext(AppContext);
-  const [appState, setAppState] = useState(appContext);
-  appState.set = setAppState;
+const AppProvider: React.FC<ContainerProps> = ({ children }: ContainerProps) => {
+  const { appState, setAppState } = useApp();
   return (
-    <AppContext.Provider value={appState}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...appState, set: setAppState }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

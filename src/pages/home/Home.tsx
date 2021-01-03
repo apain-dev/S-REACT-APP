@@ -24,8 +24,8 @@ import {
 } from 'ionicons/icons';
 import IconCard from '../../components/cards/IconCard/IconCard';
 import UserToolbar from '../../components/userToolbar/UserToolbar';
-import ModalContext from '../../contexts/ModalContext';
 import usePlaylists from '../../hooks/usePlaylists';
+import ModalContext from '../../contexts/ModalContext';
 
 const Home: React.FC = () => {
   const { playlistsAdapter } = usePlaylists();
@@ -48,13 +48,11 @@ const Home: React.FC = () => {
         <section className="ion-justify-content-between d-flex">
           <ModalContext.Consumer>
             {
-              (modalContext) => (
+              (modalState) => (
                 <>
                   <IconCard
                     subtitle="Favoris"
-                    onClick={() => modalContext.set(
-                      { ...modalContext, isOpen: !modalContext.isOpen },
-                    )}
+                    onClick={() => modalState.set({ ...modalState, isOpen: true })}
                     icon={heartOutline}
                   />
                   <IconCard subtitle="Populaire" icon={rocketOutline} />
@@ -63,6 +61,7 @@ const Home: React.FC = () => {
                 </>
               )
             }
+
           </ModalContext.Consumer>
         </section>
 
@@ -94,7 +93,7 @@ const Home: React.FC = () => {
                 <IonSlide key={projection.id}>
                   <IonCard button routerLink={`/playlists/${projection.id}`}>
                     <IonCardHeader>
-                      <img alt="an elephant" src={projection.images[0].url} />
+                      <img alt="an elephant" src={projection?.images[0]?.url || '/assets/card-album.png'} />
                     </IonCardHeader>
                     <IonCardContent class="ion-text-center">
                       <IonCardTitle class="ion-margin-bottom">

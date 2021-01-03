@@ -22,10 +22,12 @@ import { ellipsisHorizontal, ellipsisVertical } from 'ionicons/icons';
 import usePlaylists from '../../hooks/usePlaylists';
 import { Playlist } from '../../types';
 import ModalContext from '../../contexts/ModalContext';
+import useModal from '../../hooks/useModal';
 
 const PlaylistID: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { playlistsAdapter } = usePlaylists();
+  const { setVisibility } = useModal();
   const [currentPlaylist, setCurrentPlaylist] = useState<Playlist>();
 
   useEffect(() => {
@@ -50,17 +52,14 @@ const PlaylistID: React.FC = () => {
             </IonToolbar>
           </IonHeader>
           <IonCard className="ion-margin-bottom">
-            <img alt="an elephant" src={currentPlaylist?.images[0].url} />
+            <img alt="an elephant" src={currentPlaylist?.images[0]?.url || '/assets/card-album.png'} />
           </IonCard>
         </section>
         <ModalContext.Consumer>
           {
-            (modalContext) => (
-              <IonButton onClick={() => modalContext.set(
-                { ...modalContext, isOpen: true },
-              )}
-              >
-                tttt
+            (modalState) => (
+              <IonButton onClick={() => setVisibility(true)}>
+                {modalState.mode}
               </IonButton>
             )
           }

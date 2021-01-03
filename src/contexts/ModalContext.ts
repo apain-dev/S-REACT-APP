@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 
-// TODO Remove eslint-suppress
 interface ContainerProps {
-  isOpen: boolean,
-  props: {},
-  // eslint-disable-next-line no-unused-vars
-  set: (a: any) => void;
+  isOpen: boolean;
+  mode: 'ios' | 'md';
+  animated: boolean;
+  showBackdrop: boolean;
+  set: Dispatch<ContainerProps>;
 }
 
 const ModalContext = React.createContext<ContainerProps>({
   isOpen: false,
-  props: {},
+  mode: 'ios',
+  animated: true,
+  showBackdrop: true,
   set: () => {},
 });
+
+ModalContext.displayName = 'ModalContext';
 
 export default ModalContext;
